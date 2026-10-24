@@ -1,6 +1,6 @@
 {
   "name": "crew",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A delivery team of Claude Code personas and the skills that run them: grill, spec, tickets, build, review, QA, release, with a skill scout that vets new tools.",
   "author": {
     "name": "Ting Yu"

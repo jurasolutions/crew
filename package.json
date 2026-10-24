@@ -1,6 +1,6 @@
 {
   "name": "crew",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A delivery team of Claude Code agents and skills, installed with one npx command.",
   "private": true,
   "type": "module",
