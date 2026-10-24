@@ -237,7 +237,8 @@ describe('update', () => {
     const i = calls.indexOf('plugin marketplace remove crew');
     assert.ok(i >= 0, calls.join('\n'));
     assert.deepEqual(calls.slice(i, i + 3), ['plugin marketplace remove crew', `plugin marketplace add ${next}`, 'plugin install crew@crew --scope user']);
-    assert.match(m.line(r, 'crew'), /^crew: installed \(1\.1\.0 from .*re-pinned from .*#v1\.0\.0/);
+    const was = DEFAULT_SOURCE.split('#')[1].replaceAll('.', '\\.');
+    assert.match(m.line(r, 'crew'), new RegExp(`^crew: installed \\(1\\.1\\.0 from .*re-pinned from .*#${was}`));
     assert.equal(m.fake().plugins.find((p) => p.id === 'crew@crew').version, '1.1.0');
     assert.equal(m.crewState().crew.source, next);
 

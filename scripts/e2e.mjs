@@ -111,8 +111,8 @@ for (let n = 0; n < maxTurns && !done; n++) {
 }
 
 if (until) {
-  const ctx = existsSync(join(repo, 'CONTEXT.md'));
-  console.log(`\nstopped at ${until} (turn ${answered.find((a) => a.gate === until)?.turn ?? '-'}): CONTEXT.md ${ctx ? 'present' : 'MISSING'}; gates ${answered.map((a) => a.gate).join(', ')}`);
+  const ctx = existsSync(join(repo, 'GLOSSARY.md'));
+  console.log(`\nstopped at ${until} (turn ${answered.find((a) => a.gate === until)?.turn ?? '-'}): GLOSSARY.md ${ctx ? 'present' : 'MISSING'}; gates ${answered.map((a) => a.gate).join(', ')}`);
   process.exit(ctx ? 0 : 1);
 }
 
@@ -134,7 +134,7 @@ const worktrees = sh('git', ['worktree', 'list']).split('\n').filter((l) => l.in
 
 const checks = {
   'operating card written': existsSync(join(repo, 'docs', 'agents', 'crew.md')),
-  'glossary (CONTEXT.md) written': existsSync(join(repo, 'CONTEXT.md')),
+  'glossary (GLOSSARY.md) written': existsSync(join(repo, 'GLOSSARY.md')),
   'feature folder with crew-log': Boolean(feature),
   'spec': f('spec.md'),
   'functional review + UAT': reviews.includes('functional.md') && reviews.includes('uat.md'),

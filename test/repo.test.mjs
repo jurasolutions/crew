@@ -42,6 +42,19 @@ test('no secrets', () => {
   for (const p of own) for (const re of patterns) assert.doesNotMatch(read(p), re, `${rel(p)} ${re}`);
 });
 
+test('crew names the glossary file as the vendored mattpocock skills do', () => {
+  // Upstream renamed CONTEXT.md to GLOSSARY.md once already; a sync that renames it again fails here until crew follows.
+  const domain = read(join(root, 'vendor', 'mattpocock', 'setup-matt-pocock-skills', 'domain.md'));
+  const name = /\*\*`([A-Z-]+\.md)`\*\* at the repo root/.exec(domain)?.[1];
+  assert.ok(name, 'no glossary file named in the vendored domain.md');
+  for (const p of own) {
+    if (rel(p).startsWith('test/')) continue;
+    for (const line of read(p).split('\n')) {
+      if (/\b(CONTEXT|GLOSSARY)\.md\b/.test(line)) assert.ok(line.includes(name), `${rel(p)} names a glossary other than ${name}: ${line.trim()}`);
+    }
+  }
+});
+
 const agents = readdirSync(join(root, 'agents')).filter((f) => f.endsWith('.md'));
 const fm = (p) => splitFrontmatter(read(p)).frontmatter;
 

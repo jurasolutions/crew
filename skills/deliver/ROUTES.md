@@ -15,7 +15,7 @@ Each phase names who runs it, what it produces, and its done-check. "Main" means
 
 ## M — one-session feature
 
-1. **Interview (main, business analyst).** Invoke `crew:grill-with-docs`. Write each domain term into `CONTEXT.md` as it settles (create the file if the repo has none). → **G1**.
+1. **Interview (main, business analyst).** Invoke `crew:grill-with-docs`. Write each domain term into `GLOSSARY.md` as it settles (create the file if the repo has none). → **G1**.
 2. **Spec (main).** Invoke `crew:to-spec`, confirming seams with the user as it asks. In a repo with a PRD rule, write the PRD in the repo's format and folder, and put a pointer in `spec.md`.
 3. **Spec reviews, in parallel.** `crew:functional-lead` (functional review + UAT script), `crew:tech-lead` (technical review), `crew:qa-lead` (test strategy).
 4. **Slices (main).** Cut the spec into one to three tracer-bullet tickets under `issues/`, each with acceptance criteria and blocking edges. → **G2**, presenting spec, reviews and slices together.
