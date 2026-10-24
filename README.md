@@ -24,6 +24,7 @@ Restart Claude Code afterwards. The installer adds the crew plugin and then chec
 Run any of them as `npx --allow-git=root -y github:jurasolutions/crew#<tag> <command>`.
 
 - **`--allow-git=root`** is required on npm 12 and harmless on older npm.
+- **HTTPS-only machines** (signed in with `gh auth setup-git`, no SSH key): npm fetches private `github:` packages over SSH only, and rewrites even `git+https://github.com/...` to SSH. Once per machine, tell git to use HTTPS: `git config --global url."https://github.com/".insteadOf ssh://git@github.com/`. Machines with a GitHub SSH key need nothing.
 - **On Windows,** use HTTPS with `gh auth setup-git`. npm forces plain `ssh`, which often can't see keys held by Pageant or the Git Bash agent.
 
 ## Use
