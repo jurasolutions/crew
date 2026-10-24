@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // End-to-end acceptance run (PRD §2 criterion 5). Not part of `npm test`: it spends real model usage.
 //
-//   node scripts/e2e.mjs [--model sonnet] [--max-turns 40] [--out <dir>]
+//   node scripts/e2e.mjs [--model sonnet] [--max-turns 40] [--out <dir>] [--until G1]
 //
 // Copies fixtures/e2e-repo into a fresh git repo, then drives `/crew:deliver` through
 // `claude -p` turns, answering each stop the way a user would. Records, per turn, the
@@ -21,6 +21,7 @@ const opt = (name, fallback) => {
 };
 const model = opt('--model', 'sonnet');
 const maxTurns = Number(opt('--max-turns', '40'));
+const until = opt('--until'); // stop once this gate is asked, before answering (e.g. G1)
 const out = opt('--out', join(tmpdir(), `crew-e2e-${Date.now()}`));
 const repo = join(out, 'repo');
 
@@ -42,9 +43,9 @@ let session;
 let reply = `/crew:deliver ${TASK}`;
 let done = false;
 
-// The simulated user answers only the gate that comes next, judged from the end of the
-// conductor's message (where it asks). Intake messages list every gate ahead, so a gate
-// named earlier in the text is never taken as the question.
+// The simulated user answers only the gate that comes next, and only when the end of the
+// conductor's message asks for it as a question (a gate merely mentioned is not a question),
+// judged from the end of the message, where it asks. Intake messages list every gate ahead.
 let phase = 'G0';
 const answered = []; // { gate, turn }: the turn whose message asked for it
 function chooseReply(text) {
@@ -58,14 +59,14 @@ function chooseReply(text) {
       phase = 'G1';
       return 'G0: confirmed. Go with your recommended size and route, and yes to your other questions.';
     case 'G1':
-      if (asks(/\bg1\b|requirements (are )?ready|ready (to|for) (write |the )*spec/)) {
+      if (asks(/\bg1\b[^\n]{0,160}\?|requirements (are )?ready\?/)) {
         answered.push({ gate: 'G1', turn });
         phase = 'G2';
         return 'G1: yes, the requirements are ready.';
       }
       return `${recommend} Tell me when the requirements are ready (G1).`;
     case 'G2':
-      if (asks(/\bg2\b|sign[- ]?off/)) {
+      if (asks(/\bg2\b[^\n]{0,200}\?|sign[- ]?off[^\n]{0,160}\?/)) {
         answered.push({ gate: 'G2', turn });
         phase = 'build';
         return 'G2: the spec is signed off. Proceed to build.';
@@ -106,6 +107,13 @@ for (let n = 0; n < maxTurns && !done; n++) {
   console.log(`turn ${n}: ${turns.at(-1).seconds}s, gates ${turns.at(-1).gates.join(',') || '-'}, branches ${branches.length}`);
   if (result.is_error) break;
   reply = chooseReply(text);
+  if (until && answered.some((a) => a.gate === until)) break;
+}
+
+if (until) {
+  const ctx = existsSync(join(repo, 'CONTEXT.md'));
+  console.log(`\nstopped at ${until} (turn ${answered.find((a) => a.gate === until)?.turn ?? '-'}): CONTEXT.md ${ctx ? 'present' : 'MISSING'}; gates ${answered.map((a) => a.gate).join(', ')}`);
+  process.exit(ctx ? 0 : 1);
 }
 
 // Artifact and gate checks.

@@ -30,7 +30,7 @@ Size the task and propose a route from [ROUTES.md](ROUTES.md):
 | **XL** | Foggy: the way from here to done isn't visible yet |
 | **bug** / **infra** | On-ramps: a defect, or a build / deploy / config change |
 
-Tell the user the size, the route's phases and the gates they will see, with your recommendation. **G0 opens** when they confirm or override.
+Tell the user the size, the route's phases and every gate on it, G0 included, with your recommendation. End by asking for G0 by name: "**G0:** confirm size and route?". **G0 opens** when they confirm or override.
 
 For M, L and XL, dispatch `crew:skill-scout` **in the background** straight after G0, with the task's shape (stack, domains, what's new to this repo). Its cards go in `scout/` and surface at G2; they never block the flow.
 
@@ -50,7 +50,7 @@ Run independent dispatches in parallel: the three spec reviews, and developers o
 | Gate | Opens when the user… | Before it, present |
 |---|---|---|
 | **G0** | confirms size and route | size, phases, gates |
-| **G1** | says the requirements are ready | the glossary terms and decisions so far |
+| **G1** | says the requirements are ready | the decisions so far, and `CONTEXT.md` with every term pinned down (G1 isn't asked until that file exists) |
 | **G2** | signs off the spec (in a repo with a PRD rule, this is the PRD sign-off, recorded in the PRD) | the spec, the functional, technical and test-strategy reviews' blocking findings, any scout cards |
 | **G3** | approves the ticket breakdown | the tickets, their blocking edges and the tech lead's ticket review |
 | **G4** | chooses merge / PR / keep / discard | the quality gate, the final review, release notes, rollback plan |
