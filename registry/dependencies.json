@@ -1,0 +1,90 @@
+{
+  "marketplaces": {
+    "claude-plugins-official": {
+      "source": "anthropics/claude-plugins-official",
+      "catalog": "https://raw.githubusercontent.com/anthropics/claude-plugins-official/main/.claude-plugin/marketplace.json"
+    }
+  },
+  "dependencies": [
+    {
+      "id": "superpowers",
+      "required": true,
+      "kind": "plugin",
+      "plugin": "superpowers",
+      "marketplace": "claude-plugins-official",
+      "why": "verification-before-completion, systematic-debugging, worktrees, review discipline, branch finishing",
+      "detect": {
+        "pluginNames": [
+          "superpowers"
+        ],
+        "looseSkills": [
+          "verification-before-completion",
+          "systematic-debugging",
+          "finishing-a-development-branch"
+        ]
+      },
+      "vetted": {
+        "date": "2026-10-24",
+        "version": "7.0.0",
+        "catalogSource": {
+          "source": "url",
+          "url": "https://github.com/obra/superpowers.git",
+          "sha": "bb92a77741419a4ab5f06e711a283343f1ada0c3"
+        },
+        "card": "registry/cards/superpowers.md"
+      }
+    },
+    {
+      "id": "mattpocock-skills",
+      "required": true,
+      "kind": "plugin",
+      "plugin": "mattpocock-skills",
+      "marketplace": "claude-plugins-official",
+      "why": "grilling, domain-modeling, codebase-design, tdd, code-review, diagnosing-bugs, prototype, research, wizard (the user-only ones are vendored in crew)",
+      "detect": {
+        "pluginNames": [
+          "mattpocock-skills"
+        ],
+        "looseSkills": [
+          "grilling",
+          "domain-modeling",
+          "tdd",
+          "code-review"
+        ]
+      },
+      "vetted": {
+        "date": "2026-10-24",
+        "version": "1.3.1",
+        "catalogSource": {
+          "source": "url",
+          "url": "https://github.com/mattpocock/skills.git",
+          "sha": "49dd158d1076134a641b33efb035946536778336"
+        },
+        "card": "registry/cards/mattpocock-skills.md"
+      }
+    },
+    {
+      "id": "frontend-design",
+      "required": true,
+      "kind": "plugin",
+      "plugin": "frontend-design",
+      "marketplace": "claude-plugins-official",
+      "why": "UI tickets; always subordinate to a repo's own design system",
+      "detect": {
+        "pluginNames": [
+          "frontend-design"
+        ],
+        "looseSkills": [
+          "frontend-design"
+        ]
+      },
+      "vetted": {
+        "date": "2026-10-24",
+        "catalogSource": "./plugins/frontend-design",
+        "card": "registry/cards/frontend-design.md",
+        "lastCommit": "44490cccaf6d9f82fdeec9416fbf7c9bd72575dc",
+        "treeHash": "47041d13c22c96f6e0f3dbf3c28d7f415c4c60db"
+      }
+    }
+  ]
+}

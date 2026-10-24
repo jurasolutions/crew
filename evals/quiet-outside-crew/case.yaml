@@ -1,0 +1,26 @@
+schema_version: "1.1"
+name: quiet-outside-crew
+description: In an ordinary session (no /crew:deliver), the vendored crew-only skills stay quiet.
+tags: [vendored, triggering]
+plugins: ["../.."]
+runs: 2
+expected_outcome: The agent adds the --help flag directly; no crew-only vendored skill and no crew conductor fires.
+execution:
+  prompt: |
+    Add a --help flag to the CLI in bin/split.js that prints the usage line and exits 0, with a test for it.
+  max_turns: 25
+  timeout_seconds: 600
+  allowed_tools: [Read, Glob, Grep, Skill, Edit, Write, Bash]
+context:
+  scaffold_script: scaffold.sh
+graders:
+  - name: no-crew-only-skill
+    type: tool_used
+    tool: Skill
+    input_match: "crew:(to-spec|to-tickets|wayfinder|implement|implement-spec|triage|handoff|to-questionnaire|grill-with-docs|setup-matt-pocock-skills|improve-codebase-architecture|deliver)\""
+    min: 0
+    max: 0
+    arm: both
+  - name: did-the-work
+    type: llm
+    criteria: The agent changed bin/split.js so that --help prints the usage line and exits 0, and added a test for it.

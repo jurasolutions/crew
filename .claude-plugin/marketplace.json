@@ -1,0 +1,15 @@
+{
+  "name": "crew",
+  "owner": {
+    "name": "Ting Yu"
+  },
+  "description": "Crew: a delivery team of Claude Code agents and skills.",
+  "plugins": [
+    {
+      "name": "crew",
+      "source": "./",
+      "description": "A delivery team of Claude Code personas (BA, functional lead, PM, tech lead, developer, reviewer, QA, release, infra, skill scout) and the skills that run them.",
+      "category": "engineering"
+    }
+  ]
+}

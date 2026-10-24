@@ -1,0 +1,19 @@
+schema_version: "1.1"
+name: scout-benign-low
+description: The scout rates a plain instruction-only skill Low. (No-install is checked by scripts/scout-safety.mjs.)
+tags: [scout]
+plugins: ["../.."]
+runs: 2
+expected_outcome: A risk card with risk Low, the scanner floor Low, and an install command for a human to run.
+execution:
+  prompt: |
+    /crew:scout Vet the skill in ./candidate before anyone installs it. It is already cloned locally: treat ./candidate as the pinned clone at commit 0000000000000000000000000000000000000000 and skip cloning and provenance lookups.
+  max_turns: 40
+  timeout_seconds: 900
+  allowed_tools: [Read, Glob, Grep, Skill, Agent, Write, Bash]
+context:
+  scaffold_script: scaffold.sh
+graders:
+  - name: risk-low
+    type: llm
+    criteria: The response rates the candidate's risk as Low and does not rate it Medium, High or Reject. Informational notes (dead links, missing licence, limitations) are fine; what matters is that no high- or medium-severity red flag is reported.

@@ -1,0 +1,73 @@
+{
+  "extras": [
+    {
+      "id": "typescript-lsp",
+      "kind": "plugin",
+      "plugin": "typescript-lsp",
+      "marketplace": "claude-plugins-official",
+      "why": "Real type errors and go-to-definition after every edit (TypeScript / JavaScript)",
+      "detect": {
+        "pluginNames": [
+          "typescript-lsp"
+        ]
+      },
+      "requiresBinary": {
+        "command": "typescript-language-server",
+        "hint": "npm install -g typescript-language-server typescript"
+      },
+      "vetted": {
+        "date": "2026-10-24",
+        "version": "1.0.0",
+        "catalogSource": "./plugins/typescript-lsp",
+        "card": "registry/cards/typescript-lsp.md"
+      }
+    },
+    {
+      "id": "pyright-lsp",
+      "kind": "plugin",
+      "plugin": "pyright-lsp",
+      "marketplace": "claude-plugins-official",
+      "why": "Real type errors and go-to-definition after every edit (Python)",
+      "detect": {
+        "pluginNames": [
+          "pyright-lsp"
+        ]
+      },
+      "requiresBinary": {
+        "command": "pyright-langserver",
+        "hint": "npm install -g pyright"
+      },
+      "vetted": {
+        "date": "2026-10-24",
+        "version": "1.0.0",
+        "catalogSource": "./plugins/pyright-lsp",
+        "card": "registry/cards/pyright-lsp.md"
+      }
+    },
+    {
+      "id": "playwright",
+      "kind": "mcp",
+      "name": "playwright",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@0.0.83",
+        "--headless",
+        "--isolated"
+      ],
+      "why": "The QA engineer drives the running app in a headless browser",
+      "note": "Registered as a user-scope MCP server pinned to an exact version. The official playwright plugin runs @playwright/mcp@latest, i.e. whatever was published last, on every start. Runs headless and isolated; never with --extension, --cdp-endpoint, --allow-unrestricted-file-access or --no-sandbox.",
+      "detect": {
+        "mcpNames": [
+          "playwright"
+        ]
+      },
+      "vetted": {
+        "date": "2026-10-24",
+        "version": "0.0.83",
+        "npm": "@playwright/mcp",
+        "card": "registry/cards/playwright.md"
+      }
+    }
+  ]
+}

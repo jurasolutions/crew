@@ -1,0 +1,89 @@
+{
+  "descriptionPrefix": "Crew only: use inside a /crew:deliver run or a crew agent. ",
+  "_prefixNote": "The prefix applies to skills that are user-only upstream. Skills that upstream already lets the model invoke set \"prefix\": \"\" and keep their own description.",
+  "sources": {
+    "mattpocock": {
+      "repo": "mattpocock/skills",
+      "commit": "49dd158d1076134a641b33efb035946536778336",
+      "version": "1.3.1",
+      "pinnedBecause": "the commit claude-plugins-official pins for mattpocock-skills, so vendored copies match the plugin fresh machines install",
+      "license": "MIT",
+      "licenseFile": "LICENSE",
+      "copyright": "Copyright (c) 2026 Matt Pocock"
+    },
+    "vercel": {
+      "repo": "vercel-labs/agent-skills",
+      "commit": "063bee94c3f4df8453406c830b0a7df0f2860278",
+      "license": "MIT",
+      "licenseNote": "declared in the skill's own frontmatter (license: MIT); the repository has no LICENSE file",
+      "copyright": "Vercel"
+    },
+    "vercel-wig": {
+      "repo": "vercel-labs/web-interface-guidelines",
+      "commit": "434b7f91364665f2f733b310ec54809bf8f37937",
+      "license": "MIT",
+      "licenseFile": "LICENSE",
+      "copyright": "Copyright (c) 2025 Vercel Labs"
+    },
+    "supabase": {
+      "repo": "supabase/agent-skills",
+      "commit": "c9be0e931b7930f7d02126d04774d904c381e7d7",
+      "version": "0.1.9",
+      "license": "MIT",
+      "licenseFile": "LICENSE",
+      "copyright": "Copyright (c) 2026 Supabase"
+    },
+    "addyosmani": {
+      "repo": "addyosmani/agent-skills",
+      "commit": "aeac41d4d005999432bb7312f7ff06383a91d59d",
+      "version": "0.6.13",
+      "license": "MIT",
+      "licenseFile": "LICENSE",
+      "copyright": "Copyright (c) 2025 Addy Osmani"
+    }
+  },
+  "skills": [
+    { "name": "grill-with-docs", "source": "mattpocock", "path": "skills/engineering/grill-with-docs" },
+    { "name": "to-spec", "source": "mattpocock", "path": "skills/engineering/to-spec" },
+    {
+      "name": "to-tickets", "source": "mattpocock", "path": "skills/engineering/to-tickets",
+      "description": "Break a spec or plan into tracer-bullet tickets with blocking edges, published to the configured tracker."
+    },
+    {
+      "name": "wayfinder", "source": "mattpocock", "path": "skills/engineering/wayfinder",
+      "description": "Chart a huge, foggy effort as a shared map of decision tickets and resolve them one at a time until the way is clear."
+    },
+    { "name": "implement", "source": "mattpocock", "path": "skills/engineering/implement" },
+    { "name": "implement-spec", "source": "mattpocock", "path": "skills/engineering/implement-spec" },
+    { "name": "triage", "source": "mattpocock", "path": "skills/engineering/triage" },
+    { "name": "handoff", "source": "mattpocock", "path": "skills/productivity/handoff" },
+    { "name": "to-questionnaire", "source": "mattpocock", "path": "skills/productivity/to-questionnaire" },
+    { "name": "improve-codebase-architecture", "source": "mattpocock", "path": "skills/engineering/improve-codebase-architecture" },
+    {
+      "name": "setup-matt-pocock-skills", "source": "mattpocock", "path": "skills/engineering/setup-matt-pocock-skills",
+      "description": "Configure this repo's issue tracker, triage labels and domain-doc layout for the engineering skills. Run once per repo."
+    },
+    { "name": "pr", "source": "mattpocock", "path": "skills/engineering/pr", "prefix": "" },
+    { "name": "react-best-practices", "source": "vercel", "path": "skills/react-best-practices", "prefix": "" },
+    {
+      "name": "supabase-postgres-best-practices", "source": "supabase", "path": "skills/supabase-postgres-best-practices", "prefix": "",
+      "description": "Postgres best practices from Supabase, for Postgres anywhere. Load before writing or changing schemas, column types, migrations, RLS policies, indexes, triggers, functions or queries, and when diagnosing slow queries, locking, bloat or connection limits."
+    },
+    { "name": "api-and-interface-design", "source": "addyosmani", "path": "skills/api-and-interface-design", "prefix": "" }
+  ],
+  "files": [
+    {
+      "name": "phase-boundaries",
+      "source": "mattpocock",
+      "path": "skills/engineering/ask-matt/PHASE-BOUNDARIES.md",
+      "dest": "reference/PHASE-BOUNDARIES.md"
+    },
+    {
+      "name": "web-interface-guidelines",
+      "source": "vercel-wig",
+      "path": "command.md",
+      "dest": "web-interface-guidelines/command.md"
+    }
+  ],
+  "exclude": ["agents"]
+}

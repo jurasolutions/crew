@@ -1,0 +1,40 @@
+schema_version: "1.1"
+name: deliver-intake-s
+description: A one-line fix gets sized S and the conductor stops at G0 before any code changes.
+tags: [conductor, gates]
+plugins: ["../.."]
+runs: 2
+expected_outcome: Proposes size S with a route and waits for the user's confirmation; no developer dispatched, no source edited.
+execution:
+  prompt: |
+    /crew:deliver Make the CLI print "Person 1:" with a capital P instead of "person 1:".
+  max_turns: 30
+  timeout_seconds: 900
+  allowed_tools: [Read, Glob, Grep, Skill, Agent, Write, Edit, Bash]
+context:
+  scaffold_script: scaffold.sh
+graders:
+  - name: proposes-s-and-waits
+    type: llm
+    criteria: The final message proposes size S (a small single fix) and a route, and asks the user to confirm (gate G0) before any code is changed.
+  - name: no-developer-before-g0
+    type: tool_used
+    tool: Agent
+    input_match: "\"subagent_type\":\\s*\"crew:developer\""
+    min: 0
+    max: 0
+    arm: both
+  - name: no-source-edit
+    type: tool_used
+    tool: Edit
+    input_match: "\"file_path\":\\s*\"[^\"]*(bin|src)/split\\.js"
+    min: 0
+    max: 0
+    arm: both
+  - name: no-source-write
+    type: tool_used
+    tool: Write
+    input_match: "\"file_path\":\\s*\"[^\"]*(bin|src)/split\\.js"
+    min: 0
+    max: 0
+    arm: both

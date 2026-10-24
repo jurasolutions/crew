@@ -1,0 +1,33 @@
+{
+  "name": "crew",
+  "version": "1.0.0",
+  "description": "A delivery team of Claude Code agents and skills, installed with one npx command.",
+  "private": true,
+  "type": "module",
+  "license": "UNLICENSED",
+  "author": "Ting Yu",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jurasolutions/crew.git"
+  },
+  "bin": {
+    "crew": "bin/crew.mjs"
+  },
+  "files": [
+    "bin/",
+    "lib/",
+    "registry/",
+    "vendor/UPSTREAM.json",
+    ".claude-plugin/"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node scripts/test.mjs",
+    "validate": "claude plugin validate --strict .",
+    "vendor:check": "node scripts/sync-upstream.mjs check",
+    "vendor:sync": "node scripts/sync-upstream.mjs sync",
+    "e2e": "node scripts/e2e.mjs"
+  }
+}

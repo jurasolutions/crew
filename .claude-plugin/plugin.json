@@ -1,0 +1,28 @@
+{
+  "name": "crew",
+  "version": "1.0.0",
+  "description": "A delivery team of Claude Code personas and the skills that run them: grill, spec, tickets, build, review, QA, release, with a skill scout that vets new tools.",
+  "author": {
+    "name": "Ting Yu"
+  },
+  "repository": "https://github.com/jurasolutions/crew",
+  "license": "UNLICENSED",
+  "keywords": ["delivery", "team", "agents", "personas", "workflow"],
+  "skills": [
+    "./vendor/mattpocock/grill-with-docs",
+    "./vendor/mattpocock/to-spec",
+    "./vendor/mattpocock/to-tickets",
+    "./vendor/mattpocock/wayfinder",
+    "./vendor/mattpocock/implement",
+    "./vendor/mattpocock/implement-spec",
+    "./vendor/mattpocock/triage",
+    "./vendor/mattpocock/handoff",
+    "./vendor/mattpocock/to-questionnaire",
+    "./vendor/mattpocock/improve-codebase-architecture",
+    "./vendor/mattpocock/setup-matt-pocock-skills",
+    "./vendor/mattpocock/pr",
+    "./vendor/vercel/react-best-practices",
+    "./vendor/supabase/supabase-postgres-best-practices",
+    "./vendor/addyosmani/api-and-interface-design"
+  ]
+}

@@ -1,0 +1,33 @@
+schema_version: "1.1"
+name: deliver-intake-xl
+description: A huge, foggy request gets sized XL (or L) and routed to wayfinding or tickets, stopping at G0.
+tags: [conductor, gates]
+plugins: ["../.."]
+runs: 2
+expected_outcome: Proposes XL with a wayfinder map (or L with tickets), names the gates ahead, and waits; nothing is built.
+execution:
+  prompt: |
+    /crew:deliver Turn this into a multi-tenant web app with user accounts, saved groups, card payments and an admin dashboard.
+  max_turns: 30
+  timeout_seconds: 900
+  allowed_tools: [Read, Glob, Grep, Skill, Agent, Write, Edit, Bash]
+context:
+  scaffold_script: scaffold.sh
+graders:
+  - name: proposes-xl-and-waits
+    type: llm
+    criteria: The final message sizes the work as XL (foggy, multi-session) or L, proposes a route that starts with a wayfinder map of decisions or an interview followed by tickets, lists the gates ahead, and asks the user to confirm before building anything.
+  - name: no-developer
+    type: tool_used
+    tool: Agent
+    input_match: "\"subagent_type\":\\s*\"crew:developer\""
+    min: 0
+    max: 0
+    arm: both
+  - name: no-source-edit
+    type: tool_used
+    tool: Edit
+    input_match: "\"file_path\":\\s*\"[^\"]*(bin|src)/"
+    min: 0
+    max: 0
+    arm: both

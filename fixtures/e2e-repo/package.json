@@ -1,0 +1,11 @@
+{
+  "name": "split-bill",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": { "split": "bin/split.js" },
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check src/split.js && node --check bin/split.js"
+  }
+}
