@@ -37,4 +37,4 @@ _Read by every crew persona before acting. Repo rules outrank crew defaults. Las
 
 ## Tracker
 
-Issues and feature folders: see `docs/agents/issue-tracker.md`. Domain glossary: `CONTEXT.md`. ADRs: `docs/adr/`.
+Issues and feature folders: see `docs/agents/issue-tracker.md`. Domain glossary: `GLOSSARY.md`. ADRs: `docs/adr/`.

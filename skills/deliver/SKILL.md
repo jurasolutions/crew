@@ -50,7 +50,7 @@ Run independent dispatches in parallel: the three spec reviews, and developers o
 | Gate | Opens when the user… | Before it, present |
 |---|---|---|
 | **G0** | confirms size and route | size, phases, gates |
-| **G1** | says the requirements are ready | the decisions so far, and `CONTEXT.md` with every term pinned down (G1 isn't asked until that file exists) |
+| **G1** | says the requirements are ready | the decisions so far, and `GLOSSARY.md` with every term pinned down (G1 isn't asked until that file exists) |
 | **G2** | signs off the spec (in a repo with a PRD rule, this is the PRD sign-off, recorded in the PRD) | the spec, the functional, technical and test-strategy reviews' blocking findings, any scout cards |
 | **G3** | approves the ticket breakdown | the tickets, their blocking edges and the tech lead's ticket review |
 | **G4** | chooses merge / PR / keep / discard | the quality gate, the final review, release notes, rollback plan |

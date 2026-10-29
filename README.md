@@ -8,7 +8,7 @@ You need Claude Code 2.1 or later, Node 20 or later, git, and read access to thi
 
 ```sh
 gh auth login && gh auth setup-git        # once per machine (or an SSH key on GitHub)
-npx --allow-git=root -y github:jurasolutions/crew#v1.0.0 install
+npx --allow-git=root -y github:jurasolutions/crew#v1.0.1 install
 ```
 
 Restart Claude Code afterwards. The installer adds the crew plugin and then checks for each dependency. superpowers, mattpocock-skills and frontend-design are installed from `claude-plugins-official`; the extras are the TypeScript and Python language servers and Playwright, pinned. Anything already present (as a plugin, as loose skills, or synced from claude.ai) is left alone and reported. Nothing it didn't install is ever removed.
